@@ -365,7 +365,7 @@ export class AngularCli {
     // create an IFiles array including file names and contents
     var files: IFiles[] = [
       {
-        name: path.join(loc.dirPath, `${loc.fileName}.routing.ts`),
+        name: path.join(loc.dirPath, `${loc.fileName}.route.ts`),
         content: this.fc.routeContent(loc.fileName)
       }
     ];
@@ -409,7 +409,15 @@ export class AngularCli {
       {
         name: path.join(loc.dirPath, `${loc.fileName}.module.ts`),
         content: this.fc.moduleContent(loc.fileName)
-      }
+      },
+      {
+        name: path.join(loc.dirPath, `${loc.fileName}.route.ts`),
+        content: this.fc.routeContent(loc.fileName)
+      },
+      {
+        name: path.join(loc.dirPath, `index.ts`),
+        content: this.fc.indexContent(loc.fileName)
+      },
     ];
 
     await this.createFolder(loc);

@@ -74,7 +74,7 @@ export async function activate(context: ExtensionContext) {
   });
 
   var addAngular2Route = commands.registerCommand('extension.addAngular2Route', (args) => {
-    angularCli.showFileNameDialog(args, "route", "my-route.routing.ts")
+    angularCli.showFileNameDialog(args, "route", "my-route.route.ts")
       .then((loc) => angularCli.generateRoute(loc, config))
       .catch((err) => {
         if (err) {

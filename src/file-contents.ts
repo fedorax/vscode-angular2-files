@@ -102,12 +102,15 @@ describe('${inputUpperCase}Component', () => {
     var componentContent: string = `import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ${upperName}Component } from './${inputName}.component';
+import { ${upperName}Routes } from './${inputName}.route';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    ${upperName}Routes
   ],
-  declarations: [${upperName}Component]
+  declarations: [${upperName}Component],
+  exports: [${upperName}Component]
 })
 export class ${upperName}Module { }`;
     return componentContent;
@@ -243,9 +246,10 @@ describe('Pipe: ${upperName}e', () => {
     let upperName = this.toUpperCase(inputName);
 
     var content: string = `import { Routes, RouterModule } from '@angular/router';
+import { ${upperName}Component } from './${inputName}.component';
 
 const routes: Routes = [
-  {  },
+  { path: '${inputName}', component: ${upperName}Component },
 ];
 
 export const ${upperName}Routes = RouterModule.forChild(routes);
@@ -260,6 +264,16 @@ export const ${upperName}Routes = RouterModule.forChild(routes);
 }`;
     return content;
   }
+  
+  public indexContent(inputName: string): string {
+    var inputUpperCase: string;
+    inputUpperCase = inputName.charAt(0).toUpperCase() + inputName.slice(1);
+    inputUpperCase = this.camelCase(inputUpperCase);
+
+    var componentContent: string = `export { ${inputUpperCase}Module } from './${inputName}.module';`;
+    return componentContent;
+  }
+
 
   private toUpperCase(input: string): string {
     let inputUpperCase: string;
